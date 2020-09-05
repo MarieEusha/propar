@@ -36,7 +36,7 @@
             <button type = "submit" name = "createEmployee" id="createEmployee">Création d'employé'</button>    
     </div>
 
-    <div class="row pop-up" style = 'display:none'>
+    <div class="row pop-up" id="noLogin" style = 'display:none'>
         <div class="box small-6 large-centered" >
         <h3>Propar</h3>
         <p class="popUp">L'employé a bien été crée</p>
@@ -44,7 +44,7 @@
         <button type="submit" name= "continue" class="continue" id="cancel">Retour à la page précédente</button>   
         </div>
     </div>
-    <div class="row pop-up" style = 'display:none'>
+    <div class="row pop-up" id="loginExist" style = 'display:none'>
         <div class="box small-6 large-centered" >
         <h3>Propar</h3>
         <p class="popUp">Le login existe déjà</p>

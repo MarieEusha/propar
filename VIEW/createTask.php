@@ -43,8 +43,8 @@
         <a href="#" class="close-button">&#10006;</a>
         <h3>Propar</h3>
         <p class="popUp">Votre tâche a bien été crée</p>
-        <button type="submit" name= "continue" class="continue" id="Oktask">Retour</button>   
-        <button type="submit" name= "continue" class="continue" id="continue">Retour</button>   
+        <button type="submit" name= "continue" class="continue" id="Oktask">OK</button>   
+        <button type="submit" name= "continue" class="continue" id="continue">Retour à la liste de tâches</button>   
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>

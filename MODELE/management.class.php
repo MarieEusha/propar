@@ -78,6 +78,8 @@ class Management{
                }
 
         }
+
+        
         public static function addEmployee($firstname,$lastname,$login,$password,$mail,$id_status){
             $employee = self::searchEmployee($login);
 
@@ -164,6 +166,102 @@ class Management{
                 ':price' => $price
                 ]);
             
+        }
+
+        public static function searchTaskInProgressByEmployee($id_employee){
+            $query = 
+            'SELECT
+                    id_task,
+                    task.label as task_label,
+                    description,
+                    in_progress_date,
+                    type.label as type_label,
+                    customer.firstname as customer_firstname,
+                    customer.lastname as customer_lastname,
+                    task.id_employee as task_id_employee,
+                    employee.firstname as employee_firstname,
+                    employee.lastname as employee_lastname,
+                    status
+            FROM 
+                task
+            INNER JOIN
+                type
+            ON
+                task.id_type = type.id_type
+            INNER JOIN
+                customer
+            ON
+                task.id_customer = customer.id_customer
+            INNER JOIN
+                employee
+            ON 
+                task.id_employee = employee.id_employee    
+            WHERE 
+                task.id_employee = :id_employee
+            AND 
+            status = 2
+
+            ORDER BY in_progress_date DESC
+            ';
+    
+           $task = self::findAll($query,[
+               'id_employee' => $id_employee
+               ]);
+
+               if(empty($task) == true){
+                   return false;
+               }else{
+                   return $task;
+               }
+
+        }
+
+        public static function searchTaskDoneByEmployee($id_employee){
+            $query = 
+            'SELECT
+                    id_task,
+                    task.label as task_label,
+                    description,
+                    ending_date,
+                    type.label as type_label,
+                    customer.firstname as customer_firstname,
+                    customer.lastname as customer_lastname,
+                    task.id_employee as task_id_employee,
+                    employee.firstname as employee_firstname,
+                    employee.lastname as employee_lastname,
+                    status
+            FROM 
+                task
+            INNER JOIN
+                type
+            ON
+                task.id_type = type.id_type
+            INNER JOIN
+                customer
+            ON
+                task.id_customer = customer.id_customer
+            INNER JOIN
+                employee
+            ON 
+                task.id_employee = employee.id_employee    
+            WHERE 
+                task.id_employee = :id_employee
+            AND 
+            status = 3
+
+            ORDER BY ending_date DESC
+            ';
+    
+           $task = self::findAll($query,[
+               'id_employee' => $id_employee
+               ]);
+
+               if(empty($task) == true){
+                   return false;
+               }else{
+                   return $task;
+               }
+
         }
 
         public static function addTask($label,$description,$id_type,$idCustomer){

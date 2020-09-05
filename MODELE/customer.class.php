@@ -1,4 +1,5 @@
 <?php 
+require_once "Person.class.php";
 
 class Customer extends Person{
     private $mail;

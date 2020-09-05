@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $("#tableCreated").hide();
-    $("#tableDone").hide();
-    $("#tableProgress").show();
+    //$("#tableCreated").hide();
+   // $("#tableDone").hide();
+   // $("#tableProgress").show();
     
     
     $("#createdTask").click(function(){
@@ -12,7 +12,7 @@ $(document).ready(function(){
     })
 
     $("#inProgressTask").click(function(){
-        $("#tableProgress").empty();
+        $("#inProTask").empty();
         $("#tableCreated").hide();
         $("#tableDone").hide();
         $("#tableProgress").show();
@@ -95,7 +95,7 @@ $(document).ready(function(){
 
          },
             error:function(response){
-                console.log(table);
+                
                 alert('error'); 
 
             },
@@ -113,7 +113,7 @@ $(document).ready(function(){
 
          success:function(response){	
             
-                $("#tableProgress").append(
+                $("#inProTask").append(
                     "<thead>" +
                         "<tr>" +
                             "<th>" + "#"+
@@ -136,7 +136,7 @@ $(document).ready(function(){
                     "</thead>"
                         )
                         response[1].forEach(function (element){
-                            $('#tableProgress').append(
+                            $('#inProTask').append(
                                 "<tr>" +
                                     "<th>"+
                                         element.id_task +

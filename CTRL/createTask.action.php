@@ -1,7 +1,6 @@
 <?php
 
 require_once '../MODELE/management.class.php';
-require_once '../MODELE/person.class.php';
 require_once '../MODELE/customer.class.php';
 require_once '../MODELE/task.class.php';
 

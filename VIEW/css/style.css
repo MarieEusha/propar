@@ -77,3 +77,11 @@ h3 {
     padding: 20px 65px 10px 65px;
     color: dimgray;
 }
+
+.pull-right {
+    float: right;
+}
+
+.inline {
+    display: inline-block;
+}
