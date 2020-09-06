@@ -167,6 +167,32 @@ class Management{
                 ]);
             
         }
+        public static function  searchTaskInProgressByEmployeeCount($id_employee){
+            $query =
+                'SELECT 
+                    count(id_task) as nb_task
+                FROM
+                    task
+                    
+                INNER JOIN
+                    employee
+                ON 
+                    task.id_employee = employee.id_employee    
+                WHERE 
+                    task.id_employee = :id_employee
+                AND 
+                status = 2';
+
+            $task = self::findAll($query,[
+                'id_employee' => $id_employee
+                ]);
+
+                if(empty($task) == true){
+                    return false;
+                }else{
+                    return $task[0]['nb_task'];
+                }
+        }
 
         public static function searchTaskInProgressByEmployee($id_employee){
             $query = 
@@ -214,6 +240,34 @@ class Management{
                    return $task;
                }
 
+        }
+
+        //AFFICHAGE NB SOUS BOUTON
+        public static function  searchTaskDoneByEmployeeCount($id_employee){
+            $query =
+                'SELECT 
+                    count(id_task) as nb_task
+                FROM
+                    task
+                    
+                INNER JOIN
+                    employee
+                ON 
+                    task.id_employee = employee.id_employee    
+                WHERE 
+                    task.id_employee = :id_employee
+                AND 
+                status = 3';
+
+            $task = self::findAll($query,[
+                'id_employee' => $id_employee
+                ]);
+
+                if(empty($task) == true){
+                    return false;
+                }else{
+                    return $task[0]['nb_task'];
+                }
         }
 
         public static function searchTaskDoneByEmployee($id_employee){
@@ -355,8 +409,46 @@ class Management{
             ]);
         }
 
+        public static function selectByIdTask($id_task){
+            $query =
+                'SELECT 
+                    id_task,
+                    task.label,
+                    description,
+                    id_type,
+                    customer.firstname as customer_firstname,
+                    customer.lastname as customer_lastname,
+                    customer.mail as customer_mail,
+                    employee.firstname as employee_firstname,
+                    employee.lastname as employee_lastname,
+                    status_emp.label as status_label,
+                    status
+                FROM
+                    task
+                LEFT JOIN
+                    customer
+                ON
+                    task.id_customer = customer.id_customer
+                LEFT JOIN
+                    employee
+                ON 
+                    task.id_employee = employee.id_employee
+                LEFT JOIN
+                    status_emp
+                ON
+                    employee.id_status = status_emp.id_status
+                
 
-        public static function updateTask($id_task,$label,$description,$order_date,$id_type,$id_customer){
+                WHERE id_task = :id_task';
+
+                $task =self::findOne($query,[
+                    ':id_task' => $id_task
+                ]);
+            
+                return $task;
+        }
+
+        public static function updateTask($id_task,$label,$description,$id_type,$id_customer){
         
             $query = 
                 'UPDATE 
@@ -364,7 +456,6 @@ class Management{
                 SET 
                     label = :label,
                     description = :description,
-                    order_date = :order_date,
                     id_type = :id_type,
                     id_customer = :id_customer,
                     id_status = :id_status
@@ -376,7 +467,6 @@ class Management{
                  ':id_task'=> $id_task,
                  ':label'=> $label,
                  ':description'=> $description,
-                 ':order_date'=> $order_date,
                  ':id_type'=> $id_type,
                  ':id_customer'=> $id_customer,
             ]);
@@ -506,6 +596,43 @@ class Management{
 
         }
 
+        public static function statusInProgress($id_task, $id_employee){
+                $query =
+                    'UPDATE 
+                        task
+                SET 
+                    in_progress_date = Now(),
+                    task.id_employee = :id_employee,
+                    status = :status
+                WHERE 
+                    task.id_task = :id_task
+            ';
+
+                self::executeSql($query,[
+                        ':id_task' => $id_task,
+                        ':id_employee' => $id_employee,
+                        ':status' => 2
+                ]);
+        }
+
+        public static function statusDone($id_task, $id_employee){
+            $query =
+                'UPDATE 
+                    task
+            SET 
+                ending_date = Now(),
+                task.id_employee = :id_employee,
+                status = :status
+            WHERE 
+                task.id_task = :id_task
+        ';
+
+            self::executeSql($query,[
+                    ':id_task' => $id_task,
+                    ':id_employee' => $id_employee,
+                    ':status' => 3
+            ]);
+    }
         public static function userInProgress(){
             $query = 
                 'SELECT 

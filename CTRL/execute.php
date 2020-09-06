@@ -7,7 +7,7 @@ include "../MODELE/employee.class.php";
 
 //$customer = Management::searchCustomer("luigi@gmail.com");
 
-$test = Management::searchTaskInProgressByEmployee(1);
+$test = Management::selectByIdTask(6);
 
 
-var_dump($test);
+ var_dump($test);
