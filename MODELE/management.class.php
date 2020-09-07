@@ -467,7 +467,7 @@ class Management{
                 return $task;
         }
 
-        public static function updateTask($id_task,$label,$description,$id_type,$cFirstname,$cLastname,$mail,$eFirstname,$eLastname){
+        public static function updateTask($id_task,$label,$description,$id_type,$id_employee){
         
             $query = 
                 'UPDATE 
@@ -477,21 +477,7 @@ class Management{
                     task.label = :label,
                     description = :description,
                     id_type = :id_type,
-                    customer.firstname = :customer_firstname,
-                    customer.lastname = :customer_lastname,
-                    customer.mail = :customer_mail,
-                    employee.firstname = :employee_firstname,
-                    employee.lastname = :employee_lastname,
-                FROM
-                    task
-                LEFT JOIN 
-                    customer
-                ON 
-                    task.id_customer = customer.id_customer
-                LEFT JOIN
-                    employee
-                ON
-                    task.id_employee = employee.id_employee
+                    id_employee = :id_employee
                 WHERE 
                     id_task = :id_task
             ';
@@ -501,11 +487,7 @@ class Management{
                  ':label'=> $label,
                  ':description'=> $description,
                  ':id_type' => $id_type,
-                 ':customer_firstname' => $cFirstname,
-                 ':customer_lastname' => $cLastname,
-                 ':customer_mail' => $mail,
-                 ':employee_firstname' => $eFirstname,
-                 ':employee_lastname' => $eLastname,
+                 ':id_employee' => $id_employee
 
             ]);
         }
