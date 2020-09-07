@@ -19,16 +19,17 @@ $selectInfo = Management::selectByIdTask($id_task);
 
 <body>
     <div id="overlay" class="cover blur-in">
+        <form method = "POST" action="../CTRL/editTask.action.php">
             <p>Libellé </p>
             <input type="text" name='labelTask' id="labelTask" value=<?php echo $selectInfo['label'] ?>></input>
             <p>Description</p>
             <input type="text" name='description' id="description" value=<?php echo $selectInfo['description'] ?>></input>
 
             <p>Prénom du client</p>
-            <input type="text" name='firstname' id="cFirstname" value=<?php echo  $selectInfo['customer_firstname'] ?>></input>
+            <input type="text" name='cFirstname' id="cFirstname" value=<?php echo  $selectInfo['customer_firstname'] ?>></input>
 
             <p>Nom du client</p>
-            <input type="text" name='lastname' id="cLastname" value=<?php echo  $selectInfo['customer_lastname'] ?>></input>
+            <input type="text" name='cLastname' id="cLastname" value=<?php echo  $selectInfo['customer_lastname'] ?>></input>
 
             <p>Mail du client</p>
             <input type="text" name='mail' id="mail" value=<?php echo  $selectInfo['customer_mail'] ?>></input>
@@ -53,6 +54,7 @@ $selectInfo = Management::selectByIdTask($id_task);
 
 
             <button type = "submit" name = "updateTask" id="updateTask">Modification de tache</button>    
+        </form> 
     </div>
     <div class="row pop-up" style = 'display:none'>
         <div class="box small-6 large-centered" >

@@ -4,6 +4,17 @@
 <?php
 include('components/header.php')
 ?>
+<section class="content-header">
+    <h1>
+    Vos Taches
+    </h1>
+    <form method = "POST" action = "../CTRL/logout.action.php">
+        <button type="submit" class="btn btn-primary pull-right">
+            Déconnexion
+        </button>
+    </form>
+</section>
+
 
 <button type="submit" id="allCreatedTask">Tâches en attente</button>
 <button type="submit" id="yourTask">Vos tâches en cours</button>
@@ -26,6 +37,13 @@ include('components/header.php')
     </table>
 </div>
 
+<?php if($_SESSION['employee']['status'] ==1 ){ ?>
+    <button type=submit name = "revenue" id="revenue">Voir le chiffre d'affaire </button>
+    <p id="pRevenue"></p>
+
+    <button type submit name= "addType" id="addTask"> Ajout d'un type de tâche</button>
+
+<?php }?>
     <script src ="javascript/taskAccount.js"></script>
 
 <?php

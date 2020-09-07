@@ -7,7 +7,9 @@ include "../MODELE/employee.class.php";
 
 //$customer = Management::searchCustomer("luigi@gmail.com");
 
-$test = Management::selectByIdTask(6);
+//$test = Management::updateTask(1,'test', "test",1,"Mario","Bros",'mario@gmail.com',"bibu","bobo");
+
+$test = Management::revenue();
 
 
- var_dump($test);
+ var_dump($test['revenue']);

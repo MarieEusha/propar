@@ -26,6 +26,11 @@ $(document).ready(function(){
 
     })
 
+    $("#revenue").click(function(){
+        $("#pRevenue").empty();
+        $("#pRevenue").show();
+
+    })
 
 
     $("#allCreatedTask").click(function(e){
@@ -325,6 +330,30 @@ $(document).ready(function(){
     });
 
    
+    $("#revenue").click(function(e){
+        e.preventDefault();
 
+            $.ajax({
+            url:'../CTRL/revenue.action.php',
+            type:'POST',
+            dataType:'json',
+
+                success:function(response){	
+                    var status = response['status']
+                    if(status == 1){
+                        let revenue = response['revenue'];
+                        let $pRevenue = "Le chiffre d'affaire de l'entreprise est de : "+ " " + revenue + "€";
+                    $("#pRevenue").append($pRevenue);
+                    }
+                },
+           
+    
+            error:function(response){
+                
+                alert('error'); 
+
+            },
+         });
+    });
 
 });

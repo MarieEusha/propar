@@ -58,6 +58,25 @@ class Management{
             return $query->fetch();
         }
 
+        public static function selectAllEmployees(){
+            $query =
+                'SELECT 
+                    id_employee,
+                    employee.firstname,
+                    employee.lastname,
+                    employee.mail,
+                    status_emp.label
+                FROM 
+                    employee
+                INNER JOIN
+                    status_emp
+                ON
+                    employee.id_status = status_emp.id_status';
+
+            $employees =self::findAll($query,[]);
+            return $employees;
+        }
+
         public static function searchEmployee($login){
             $query = 
             'SELECT
@@ -448,17 +467,31 @@ class Management{
                 return $task;
         }
 
-        public static function updateTask($id_task,$label,$description,$id_type,$id_customer){
+        public static function updateTask($id_task,$label,$description,$id_type,$cFirstname,$cLastname,$mail,$eFirstname,$eLastname){
         
             $query = 
                 'UPDATE 
                     task
                 SET 
-                    label = :label,
+                    id_task = :id_task,
+                    task.label = :label,
                     description = :description,
                     id_type = :id_type,
-                    id_customer = :id_customer,
-                    id_status = :id_status
+                    customer.firstname = :customer_firstname,
+                    customer.lastname = :customer_lastname,
+                    customer.mail = :customer_mail,
+                    employee.firstname = :employee_firstname,
+                    employee.lastname = :employee_lastname,
+                FROM
+                    task
+                LEFT JOIN 
+                    customer
+                ON 
+                    task.id_customer = customer.id_customer
+                LEFT JOIN
+                    employee
+                ON
+                    task.id_employee = employee.id_employee
                 WHERE 
                     id_task = :id_task
             ';
@@ -467,8 +500,13 @@ class Management{
                  ':id_task'=> $id_task,
                  ':label'=> $label,
                  ':description'=> $description,
-                 ':id_type'=> $id_type,
-                 ':id_customer'=> $id_customer,
+                 ':id_type' => $id_type,
+                 ':customer_firstname' => $cFirstname,
+                 ':customer_lastname' => $cLastname,
+                 ':customer_mail' => $mail,
+                 ':employee_firstname' => $eFirstname,
+                 ':employee_lastname' => $eLastname,
+
             ]);
         }
 
@@ -491,10 +529,6 @@ class Management{
             ]);
         }
 
-
-        /*public static function Assigned($id_employee){
-
-        }*/
 
         public static function displayCreatedTask(){
             $query = 
@@ -632,47 +666,23 @@ class Management{
                     ':id_employee' => $id_employee,
                     ':status' => 3
             ]);
-    }
-        public static function userInProgress(){
-            $query = 
-                'SELECT 
-                    id_task,
-                    task.label as task_label,
-                    description,
-                    in_progress_date,
-                    id_employee,
-                    type.label as type_label,
-                    customer.firstname as customer_firstname,
-                    customer.lastname as customer_lastname,
-                    employee.firstname as employee_firstname,
-                    employee.lastname as employee_lastname,
-                    status
-                    
-                FROM task
-                INNER JOIN 
-                    type
-                ON 
-                    task.id_type = type.id_type
-                INNER JOIN
-                    customer 
-                ON 
-                    task.id_customer = customer.id_customer
-                    
-                INNER JOIN 
-                    employee 
-                ON 
-                    task.id_employee = employee.id_employee
-                
-                WHERE status = 2
-
-
-                ORDER BY in_progress_date';
-
-            $userTask = self::findAll($query,[]);
-
-            return $userTask;
-                
-
         }
 
-    }
+        public static function revenue(){
+            $query =
+            'SELECT SUM(type.price) as revenue
+            FROM 
+            task 
+            INNER JOIN
+                type
+            ON 
+                task.id_type = type.id_type';
+
+            $ca = self::findOne($query,[]);
+
+
+            return $ca['revenue'];
+        }
+ 
+
+}
