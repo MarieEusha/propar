@@ -1,25 +1,21 @@
 $(document).ready(function(){
+
     function errorMsg(msg){
         $('#errorMsg').html(msg)
         $('.danger-alert').css('display','block')
         $('.alert').delay(1000).fadeOut(2000);
     }
-    
-    $("#createTask").click(function(e){
+
+    $("#createType").click(function(e){
         e.preventDefault();
 
             $.ajax({
-            url:'../CTRL/createTask.action.php',
+            url:'../CTRL/createTypeTask.action.php',
             type:'POST',
             data: {
 
-                label : $("#labelTask").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-                description : $("#description").val(),
-                type : $("input[name='type']").val(),
-                firstname : $("#firstname").val(),
-                lastname : $("#lastname").val(),
-                mail : $("#mail").val()
-                           
+                label : $("#labelType").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
+                price : $("#price").val(),                           
             },
          success:function(response){	
                 if(response == "enter"){
@@ -36,16 +32,16 @@ $(document).ready(function(){
                         });
                     });
                     $("#Oktask").click(function(){
-                        window.location = "../VIEW/createTask.php";
+                        window.location = "../VIEW/createTypeTask.php";
                     });
                     
                     $("#continue").click(function(){
                         window.location = "../VIEW/taskList.php";
                     });
-                }else if(response == "emptyField"){
-                    let msg = "Un des champs est vide";
+                }else if(response == "error"){
+                    let msg ="Un des champs est vide";
                     errorMsg(msg);
-                }
+                };
             },
             error:function(response){
                 

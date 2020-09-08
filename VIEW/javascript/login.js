@@ -1,5 +1,9 @@
 $(document).ready(function(){
- 
+    function errorMsg(msg){
+        $('#errorMsg').html(msg)
+        $('.danger-alert').css('display','block')
+        $('.alert').delay(1000).fadeOut(2000);
+    }
     $("#submit").click(function(e){
         e.preventDefault();
  
@@ -16,21 +20,20 @@ $(document).ready(function(){
                 window.location = "../VIEW/taskAccount.php";
                 }
 
-                if(response == "mdp"){
-                    alert("Votre mdp est incorrect");
-                }
-
-                if(response == "login"){
-                    alert("Votre login est incorrect");
+                if(response == "error"){
+                    let msg = "Votre mdp ou votre login est incorrect";
+                    errorMsg(msg);
                 }
 
                 if(response == "nologin"){
-                    alert("Il n'y a pas compte associé à ce login")
+                    let msg = "Il n'y a pas compte associé à ce login";
+                    errorMsg(msg);
                 }
             },
 			error:function(response){
                 
-				alert('error');
+                let msg = 'error';
+                errorMsg(msg);
 
             },
 

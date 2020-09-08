@@ -6,12 +6,9 @@ require_once '../MODELE/employee.class.php';
 
 session_start();
 
-$id_task = (int)$_POST['idTask'];
-
-// $selectInfo = Management::selectByIdTask($id_task);
-
-
-header('Location: ../VIEW/editTask.php?taskId=' . $id_task);
+$id_emp = (int)$_POST['idEmp'];
 
 
 
+
+header('Location: ../VIEW/editEmp.php?empId=' . $id_emp);

@@ -6,43 +6,29 @@ $id_task = (int) $_GET['taskId'];
 $selectInfo = Management::selectByIdTask($id_task);
 
 ?>
+<?php
+include(__DIR__.'/components/header.php')
+?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css'/>
-    <title>Document</title> 
-</head>
+    <div  style=" display: none; width: 300px; margin-left: 47rem ;position: absolute; z-index: 20" class="alert danger-alert">
+        <h3 id="errorMsg" style="font-size:20px"> </h3>
+    </div>
 
-<body>
+
     <div id="overlay" class="cover blur-in">
-        <form method = "POST" action="../CTRL/editTask.action.php">
             <p>Libellé </p>
             <input type="text" name='labelTask' id="labelTask" value=<?php echo $selectInfo['label'] ?>></input>
+
+            <input type="hidden" name='idTask' id="idTask" value=<?php echo $selectInfo['id_task'] ?>></input>
+
             <p>Description</p>
             <input type="text" name='description' id="description" value=<?php echo $selectInfo['description'] ?>></input>
 
-            <p>Prénom du client</p>
-            <input type="text" name='cFirstname' id="cFirstname" value=<?php echo  $selectInfo['customer_firstname'] ?>></input>
-
-            <p>Nom du client</p>
-            <input type="text" name='cLastname' id="cLastname" value=<?php echo  $selectInfo['customer_lastname'] ?>></input>
-
-            <p>Mail du client</p>
-            <input type="text" name='mail' id="mail" value=<?php echo  $selectInfo['customer_mail'] ?>></input>
-
-            <p>Prénom de l'employé</p>
-            <input type="text" name='firstname' id="eFirstname" value=<?php echo  $selectInfo['employee_lastname'] ?>></input>
-
-            <p>Nom de l'employé</p>
-            <input type="text" name='lastname' id="eLastname" value=<?php echo  $selectInfo['employee_lastname'] ?>></input>
-
+            <p>Numéro de l'employé</p>
+            <input type="text" name="idEmp" id="idEmp" value=<?php echo $selectInfo['id_employee'] ?>></input>
 
             <p>Type de tâches</p>
-            <input type="radio" id="importante" name="type" value="1">
+            <input type="radio" id="importante" name="type" value="1" checked>
             <label for="importante">importante</label>
 
             <input type="radio" id="moyenne" name="type" value="2">
@@ -54,7 +40,6 @@ $selectInfo = Management::selectByIdTask($id_task);
 
 
             <button type = "submit" name = "updateTask" id="updateTask">Modification de tache</button>    
-        </form> 
     </div>
     <div class="row pop-up" style = 'display:none'>
         <div class="box small-6 large-centered" >
@@ -64,7 +49,10 @@ $selectInfo = Management::selectByIdTask($id_task);
         <button type="submit" name= "continue" class="continue" id="continue">Retour à la liste de tâches</button>   
         </div>
     </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 
-</body>
+    <script src ="javascript/editTask.js"></script>
+<?php
+include(__DIR__.'/components/footer.php')
+?>
+
 </html>

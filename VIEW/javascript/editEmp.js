@@ -4,22 +4,19 @@ $(document).ready(function(){
         $('.danger-alert').css('display','block')
         $('.alert').delay(1000).fadeOut(2000);
     }
-    
-    $("#createTask").click(function(e){
+    $("#updateEmployee").click(function(e){
         e.preventDefault();
 
-            $.ajax({
-            url:'../CTRL/createTask.action.php',
+        $.ajax({
+            url:'../CTRL/editEmp.action.php',
             type:'POST',
             data: {
-
-                label : $("#labelTask").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-                description : $("#description").val(),
-                type : $("input[name='type']").val(),
+                lastname : $("#nameEmp").val(),
                 firstname : $("#firstname").val(),
-                lastname : $("#lastname").val(),
-                mail : $("#mail").val()
-                           
+                mail : $("#mail").val(),
+                id_employee : $('#idEmp').val(),
+                status : $("input[name='status']").val()
+                                
             },
          success:function(response){	
                 if(response == "enter"){
@@ -29,20 +26,16 @@ $(document).ready(function(){
 
                         $('.close-button').click(function (e) { 
 
-                        $('.pop-up').fadeOut(700);
-                        $('#overlay').removeClass('blur-in');
-                        $('#overlay').addClass('blur-out');
-                        e.stopPropagation();
+                            $('.pop-up').fadeOut(700);
+                            $('#overlay').removeClass('blur-in');
+                            $('#overlay').addClass('blur-out');
+                            e.stopPropagation();
                         });
                     });
-                    $("#Oktask").click(function(){
-                        window.location = "../VIEW/createTask.php";
-                    });
-                    
                     $("#continue").click(function(){
-                        window.location = "../VIEW/taskList.php";
+                        window.location = "../VIEW/employeeList.php";
                     });
-                }else if(response == "emptyField"){
+                }else if(response == "error"){
                     let msg = "Un des champs est vide";
                     errorMsg(msg);
                 }

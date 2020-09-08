@@ -1,6 +1,13 @@
 
 $(document).ready(function(){
-        $.ajax({
+    
+    function errorMsg(msg){
+        $('#errorMsg').html(msg)
+        $('.danger-alert').css('display','block')
+        $('.alert').delay(1000).fadeOut(2000);
+    }
+    
+    $.ajax({
         url:'../CTRL/employeeList.action.php',
         type:'POST',
         dataType:'json',
@@ -46,7 +53,7 @@ $(document).ready(function(){
                     "<td>";
                     if(status == 1){
                         $htmlE += 
-                        "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
+                        "<form action=\"../CTRL/selectEmpInfo.action.php\" method=\"POST\" class=\"inline\">"+
                             "<input type=\"hidden\" name= \"idEmp\" value=\"" + element.id_employee + "\" />"+
                             "<button type=submit>"+
                                 "Edit" +
@@ -64,6 +71,13 @@ $(document).ready(function(){
                             "</tr>";
                             $("#employeeListTable").append($htmlE)
                 });
+                if(response == "noEmp"){
+                    let msg = "Il n'y pas d'employé dans la base données"
+                    errorMsg(msg);
+                }else if (response == "noStatus"){
+                    let msg = "Vous n'avez pas de status";
+                    error(msg);
+                }
         },
         error:function(response){
             alert('error'); 

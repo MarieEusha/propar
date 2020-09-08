@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    function errorMsg(msg){
+        $('#errorMsg').html(msg)
+        $('.danger-alert').css('display','block')
+        $('.alert').delay(1000).fadeOut(2000);
+    }
+
     $("#createEmployee").click(function(e){
         e.preventDefault();
 
@@ -19,12 +25,12 @@ $(document).ready(function(){
 
                 if(response == "enter"){
                     $(function() {
-                        $('#noLogin').css('display:block');
-                        $('#noLogin').fadeIn(1000);
+                        $('#cEmp').css('display:block');
+                        $('#cEmp').fadeIn(1000);
 
                         $('.close-button').click(function (e) { 
 
-                        $('#noLogin').fadeOut(700);
+                        $('#cEmp').fadeOut(700);
                         $('#overlay').removeClass('blur-in');
                         $('#overlay').addClass('blur-out');
                         e.stopPropagation();
@@ -37,27 +43,16 @@ $(document).ready(function(){
                     $("#cancel").click(function(){
                         window.location = "../VIEW/employeeList.php";
                     });
-                }else if(response == "false"){
+                }else if(response == "mail"){
+                    let msg = "Votre mail n'est pas valide";
+                    errorMsg(msg);
                     
-                    $(function() {
-                        $('#loginExist').css('display:block');
-                        $('#loginExist').fadeIn(1000);
-
-                        $('.close-button').click(function (e) { 
-
-                        $('#loginExist').fadeOut(700);
-                        $('#overlay').removeClass('blur-in');
-                        $('#overlay').addClass('blur-out');
-                        e.stopPropagation();
-                        });
-                    });
-
-                    $("#okEmployee").click(function(){
-                       window.location = "../VIEW/createEmployee.php";
-                    });
-                    $("#cancelEmployee").click(function(){
-                        window.location = "../VIEW/employeeList.php";
-                    });
+                }else if (response == "emptyField"){
+                    let msg = "Un des champs est vide";
+                    errorMsg(msg);
+                }else if (response == "existLogin"){
+                    let msg = "Cet employé existe déjà"
+                    errorMsg(msg);
                 }
             },
             error:function(response){

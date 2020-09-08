@@ -107,12 +107,6 @@ $(document).ready(function(){
                         }
                         if (status == 1) {
                             $htmlCT += 
-                            "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
-                                "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                "<button type=submit>"+
-                                    "Edit" +
-                                "</button>"+
-                            "</form>"+
                                 "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                                     "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
                                     "<button type=submit>"+
@@ -300,12 +294,6 @@ $(document).ready(function(){
                                     "</td>"    
                                     if (status == 1) {
                                         $htmlDT += "<td>"+
-                                        "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
-                                            "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                            "<button type=submit>"+
-                                                "Edit" +
-                                            "</button>"+
-                                        "</form>"+
                                         "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                                             "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
                                             "<button type=submit>"+

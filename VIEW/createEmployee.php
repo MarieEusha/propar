@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
+<?php
+include(__DIR__.'/components/header.php')
+?>
+
+    <div  style=" display: none; width: 300px; margin-left: 47rem ;position: absolute; z-index: 20" class="alert danger-alert">
+        <h3 id="errorMsg" style="font-size:20px"> </h3>
+    </div>
+
+
     <div id="overlay" class="cover blur-in">
             <p>Nom </p>
             <input type="text" name='nameEmployee' id="nameEmployee"></input>
@@ -36,7 +36,7 @@
             <button type = "submit" name = "createEmployee" id="createEmployee">Création d'employé'</button>    
     </div>
 
-    <div class="row pop-up" id="noLogin" style = 'display:none'>
+    <div class="row pop-up" id="cEmp" style = 'display:none'>
         <div class="box small-6 large-centered" >
         <h3>Propar</h3>
         <p class="popUp">L'employé a bien été crée</p>
@@ -44,15 +44,7 @@
         <button type="submit" name= "continue" class="continue" id="cancel">Retour à la page précédente</button>   
         </div>
     </div>
-    <div class="row pop-up" id="loginExist" style = 'display:none'>
-        <div class="box small-6 large-centered" >
-        <h3>Propar</h3>
-        <p class="popUp">Le login existe déjà</p>
-        <button type="submit" name= "continue" class="continue" id="okEmployee">OK</button>
-        <button type="submit" name= "continue" class="continue" id="cancelEmployee">Retour à la page précédente</button>   
-        </div>
-    </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src ="javascript/createEmployee.js"></script>
-</body>
-</html>
+<?php
+include(__DIR__.'/components/footer.php')
+?>

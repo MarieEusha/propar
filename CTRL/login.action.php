@@ -11,13 +11,15 @@
     $login = $_POST['login'];
     
     $employee = Employee::logIn($login);
- 
-    if(isset($login) && isset($password) ){
+    
+
+
+    if(isset($login) && isset($password)){
+  
         if(empty($login))
         {    
              echo   "nologin";
         }
-        
         //verification du login reçu avec celui stocké en bdd
        // Est-ce que le mot de passe spécifié est correct par rapport à celui stocké ?
         if($login == $employee['login'] && (password_verify($password, $employee['password']))){
@@ -33,15 +35,10 @@
 
  
   
-        }elseif($login == $employee['login'] && (!password_verify($password, $employee['password']))){
-            echo "mdp";
+        }elseif(($login === $employee['login'] && (!password_verify($password, $employee['password']))) || ($login == !$employee['login'])){
+            echo "error";
 
-        }elseif($login == !$employee['login']){
-
-            echo   "login";
-            
         }
- 
 
 
 }

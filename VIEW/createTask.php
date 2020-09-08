@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css'/>
-    <title>Document</title>
-    
-</head>
-<body>
+<?php
+    session_start();
+?>
+<?php
+include(__DIR__.'/components/header.php')
+?>
+
+    <div  style=" display: none; width: 300px; margin-left: 47rem ;position: absolute; z-index: 20" class="alert danger-alert">
+        <h3 id="errorMsg" style="font-size:20px"> </h3>
+    </div>
+
     <div id="overlay" class="cover blur-in">
             <p>Libellé </p>
             <input type="text" name='labelTask' id="labelTask"></input>
@@ -47,7 +47,8 @@
         <button type="submit" name= "continue" class="continue" id="continue">Retour à la liste de tâches</button>   
         </div>
     </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
     <script src ="javascript/createTask.js"></script>
-</body>
-</html>
+<?php
+include(__DIR__.'/components/footer.php')
+?>

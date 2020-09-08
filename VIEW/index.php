@@ -1,8 +1,13 @@
 <?php
-include('components/header.php')
+    session_start();
+?>
+<?php 
+unset($_SESSION);    
 ?>
 
-
+<?php
+include(__DIR__.'/components/header.php');
+?>
 <a href="login.php"><button id="login">Se connecter</button></a>
     <button type="submit" id="createdTask">Tâches crées</button>
     <button type="submit" id="inProgressTask">Tâches en cours</button>
@@ -26,5 +31,5 @@ include('components/header.php')
     <script src ="javascript/index.js"></script>
 
 <?php
-include('components/footer.php')
+include(__DIR__.'/components/footer.php');
 ?>

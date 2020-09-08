@@ -37,11 +37,12 @@ include('components/header.php')
     </table>
 </div>
 
-<?php if($_SESSION['employee']['status'] ==1 ){ ?>
+    <a href="createTask.php"><button type=submit name="addTask" id="addTask" > Ajouter une tâche</button></a>
+<?php if($_SESSION['employee']['status'] == 1 ){ ?>
     <button type=submit name = "revenue" id="revenue">Voir le chiffre d'affaire </button>
     <p id="pRevenue"></p>
 
-    <button type submit name= "addType" id="addTask"> Ajout d'un type de tâche</button>
+    <a href = "../VIEW/createTypeTask.php"><button type submit name= "addType" id="addTask"> Ajout d'un type de tâche</button></a>
 
 <?php }?>
     <script src ="javascript/taskAccount.js"></script>

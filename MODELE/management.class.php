@@ -58,6 +58,26 @@ class Management{
             return $query->fetch();
         }
 
+        public static function selectOneEmployee($id_employee){
+            $query =
+                'SELECT 
+                    id_employee,
+                    employee.firstname,
+                    employee.lastname,
+                    employee.mail,
+                    id_status
+                FROM 
+                    employee
+                WHERE 
+                    id_employee = :id_employee
+                ';
+
+            $employee =self::findOne($query,[
+                ':id_employee' => $id_employee
+            ]);
+            return $employee;
+        }
+
         public static function selectAllEmployees(){
             $query =
                 'SELECT 
@@ -216,7 +236,7 @@ class Management{
         public static function searchTaskInProgressByEmployee($id_employee){
             $query = 
             'SELECT
-                    id_task,
+                    id_task, 
                     task.label as task_label,
                     description,
                     in_progress_date,
@@ -400,17 +420,14 @@ class Management{
             
         }
 
-        public static function updateEmployee($id_employee,$firstname,$lastname,$login,$password,$mail,$id_status){
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-            
+        public static function updateEmployee($id_employee,$firstname,$lastname,$mail,$id_status){
+
             $query = 
                 'UPDATE 
                     employee
                 SET 
                     firstname = :firstname,
                     lastname = :lastname,
-                    login = :login,
-                    password = :password,
                     mail = :mail,
                     id_status = :id_status
                 WHERE 
@@ -421,8 +438,6 @@ class Management{
                  ':id_employee'=> $id_employee,
                  ':firstname'=> $firstname,
                  ':lastname'=> $lastname,
-                 ':login'=> $login,
-                 ':password'=> $passwordHash,
                  ':mail'=> $mail,
                  ':id_status' => $id_status
             ]);
@@ -435,19 +450,10 @@ class Management{
                     task.label,
                     description,
                     id_type,
-                    customer.firstname as customer_firstname,
-                    customer.lastname as customer_lastname,
-                    customer.mail as customer_mail,
-                    employee.firstname as employee_firstname,
-                    employee.lastname as employee_lastname,
-                    status_emp.label as status_label,
+                    task.id_employee,
                     status
                 FROM
                     task
-                LEFT JOIN
-                    customer
-                ON
-                    task.id_customer = customer.id_customer
                 LEFT JOIN
                     employee
                 ON 
