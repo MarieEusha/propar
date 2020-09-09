@@ -15,29 +15,30 @@ $(document).ready(function(){
      success:function(response){	
             var status = response['status'];
             let $head =
-                "<thead>" +
+                "<thead class='thead-dark'>" +
                     "<tr>" +
-                        "<th>" + "#"+
+                        "<th scope='col'>" + "#"+
                         "</th>"+
-                        "<th>" + "Employé"+
+                        "<th scope='col'>" + "Employé"+
                         "</th>"+
-                        "<th>" + "mail"+
+                        "<th scope='col'>" + "mail"+
                         "</th>"+
-                        "<th>" + "Status"+
+                        "<th scope='col'>" + "Status"+
                         "</th>";
                         if(status == 1){
                             $head += 
-                                "<th>" + "Action"+
+                                "<th scope='col'>" + "Action"+
                                 "</th>" ;
                         }
                 $head +=
                     "</tr>"+
-                "</thead>";
+                "</thead>"+
+                "<tbody id='tbodyEmp'>"  + "</tbody>"           ;
                 $("#employeeListTable").append($head);
                 
                 response['allEmployees'].forEach(function (element){
-                    console.log(element)
-                    let $htmlE = "<tr>" +
+                    let $htmlE = 
+                    "<tr>" +
                     "<td>"+
                         element.id_employee +
                     "</td>" +
@@ -55,13 +56,13 @@ $(document).ready(function(){
                         $htmlE += 
                         "<form action=\"../CTRL/selectEmpInfo.action.php\" method=\"POST\" class=\"inline\">"+
                             "<input type=\"hidden\" name= \"idEmp\" value=\"" + element.id_employee + "\" />"+
-                            "<button type=submit>"+
+                            "<button type=submit class='btn btn-outline-secondary'>"+
                                 "Edit" +
                             "</button>"+
                         "</form>"+
                         "<form action=\"../CTRL/deleteEmployee.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                             "<input type=\"hidden\" name= \"idEmp\" value=\"" + element.id_employee + "\" />"+
-                            "<button type=submit>"+
+                            "<button type=submit class='btn btn-outline-danger'>"+
                                 "Delete" +
                             "</button>"+
                         "</form>";
@@ -69,7 +70,11 @@ $(document).ready(function(){
                         $htmlE += 
                         "</td>" +
                             "</tr>";
-                            $("#employeeListTable").append($htmlE)
+                            $("#tbodyEmp").append($htmlE)
+
+                            $(document).ready( function () {
+                                $('#employeeListTable').DataTable();
+                            } );
                 });
                 if(response == "noEmp"){
                     let msg = "Il n'y pas d'employé dans la base données"
@@ -78,6 +83,10 @@ $(document).ready(function(){
                     let msg = "Vous n'avez pas de status";
                     error(msg);
                 }
+
+               
+
+
         },
         error:function(response){
             alert('error'); 

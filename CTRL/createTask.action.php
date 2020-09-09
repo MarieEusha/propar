@@ -16,14 +16,16 @@ $mail = $_POST['mail'];
 
 
 //Verifier si les champs sont vides ou null
-if(!empty($label)&&!empty($description)&&!empty($type)&&!empty($firstname)&&!empty($lastname)&&!empty($mail) && !isset($label) && !isset($description) && !isset($type) && !isset($firstname)&& !isset($lastname) && !isset($mail)){
+if(!empty($label)&&!empty($description)&&!empty($type)&&!empty($firstname)&&!empty($lastname)&&!empty($mail) && isset($label) && isset($description) && isset($type) && isset($firstname)&& isset($lastname) && isset($mail)){
+    if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        echo "mail";
+    }else{
+        $customer_id = Management::addCustomer($firstname,$lastname,$mail);
+        
+        $addTask = Management::addTask($label,$description,$type,$customer_id);
+        echo "enter";
+    }
 
-    $customer_id = Management::addCustomer($firstname,$lastname,$mail);
-    
-    $addTask = Management::addTask($label,$description,$type,$customer_id);
-    
-
-    echo "enter";
 }else{
     echo "emptyField";
 }

@@ -16,35 +16,35 @@ include('components/header.php')
 </section>
 
 
-<button type="submit" id="allCreatedTask">Tâches en attente</button>
-<button type="submit" id="yourTask">Vos tâches en cours</button>
-<button type="submit" id="yourTaskDone">Vos tâches terminées</button>
+<button type="submit" class="btn btn-dark" id="allCreatedTask">Tâches en attente</button>
+<button type="submit" class="btn btn-dark" id="yourTask">Vos tâches en cours</button>
+<button type="submit" class="btn btn-dark" id="yourTaskDone">Vos tâches terminées</button>
 
 
 <div id ="tableCreatedTask">
-    <table id="allCreatedList">
+    <table class ="table" id="allCreatedList">
         
     </table>
 </div>
 <div id ="yourTableProgress">
-    <table id="yourInProgressList">
+    <table class="table" id="yourInProgressList">
         
     </table>
 </div>
 <div id ="yourTableDone">
-    <table id="yourDoneList">
+    <table class="table" id="yourDoneList">
         
     </table>
 </div>
-
-    <a href="createTask.php"><button type=submit name="addTask" id="addTask" > Ajouter une tâche</button></a>
 <?php if($_SESSION['employee']['status'] == 1 ){ ?>
-    <button type=submit name = "revenue" id="revenue">Voir le chiffre d'affaire </button>
+    <button type=submit   class = "btn btn-outline-dark" name = "revenue" id="revenue">Voir le chiffre d'affaire </button>
     <p id="pRevenue"></p>
 
-    <a href = "../VIEW/createTypeTask.php"><button type submit name= "addType" id="addTask"> Ajout d'un type de tâche</button></a>
+    <a href = "../VIEW/createTypeTask.php"><button type = submit  class = "btn btn-outline-info name= "addType" id="addTask"> Ajouter d'un type de tâche</button></a>
 
 <?php }?>
+    <a href="createTask.php"><button type=submit class = "btn btn-outline-info" name="addTask" id="addTask" > Ajouter une tâche</button></a>
+
     <script src ="javascript/taskAccount.js"></script>
 
 <?php

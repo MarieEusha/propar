@@ -15,7 +15,7 @@ $(document).ready(function(){
                 firstname : $("#firstname").val(),
                 mail : $("#mail").val(),
                 id_employee : $('#idEmp').val(),
-                status : $("input[name='status']").val()
+                status : $("input[name='status']:checked").val()
                                 
             },
          success:function(response){	

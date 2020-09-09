@@ -16,7 +16,7 @@ $(document).ready(function(){
                 idTask : $("#idTask").val(),
                 description : $("#description").val(),
                 id_employee : $('#idEmp').val(),
-                type : $("input[name='type']").val()
+                type : $("input[name='type']:checked").val()
                                 
             },
          success:function(response){	

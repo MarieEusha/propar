@@ -1,8 +1,10 @@
+
+    
 $(document).ready(function(){
+ 
     $("#tableCreatedTask").hide();
     $("#yourTableDone").hide();
     $("#yourTableProgress").show();
-    
     
     $("#allCreatedTask").click(function(){
         $("#allCreatedList").empty();
@@ -39,31 +41,30 @@ $(document).ready(function(){
             $.ajax({
             url:'../CTRL/taskAccount.action.php',
             type:'POST',
-            dataType:'json',
+            dataType:'json', 
 
          success:function(response){	
                 var status = response['status'];
                 $("#allCreatedList").append(
-                    "<thead>" +
+                    "<thead class ='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col' >" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date de création"+
+                            "<th scope='col'>" + "Date de création"+
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
-                            "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                              "</th>" +
-                             "<th>" + "Action"+
+                             "<th scope='col'>" + "Action"+
                              "</th>" +
                         "</tr>"+
                     "</thead>"
@@ -100,7 +101,7 @@ $(document).ready(function(){
                             $htmlCT += 
                             "<form action=\"../CTRL/statusInProgress.action.php\" method=\"POST\" onsubmit=\"return confirm('La tâche vous a été attribuée');\" class=\"inline\">"+
                                 "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                "<button type=submit>"+
+                                "<button type=submit class='btn btn-outline-primary'>"+
                                 "Attribution" +
                                 "</button>"+
                             "</form>";
@@ -109,7 +110,7 @@ $(document).ready(function(){
                             $htmlCT += 
                                 "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                                     "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                    "<button type=submit>"+
+                                    "<button type=submit class='btn btn-outline-danger'>"+
                                         "Delete" +
                                     "</button>"+
                                 "</form>";
@@ -143,25 +144,25 @@ $(document).ready(function(){
             var status = response['status']
             
                 $("#yourInProgressList").append(
-                    "<thead>" +
+                    "<thead class ='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col'>" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date d'attribution" +
+                            "<th scope='col'>" + "Date d'attribution" +
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                             "</th>"+
-                            "<th>" + "Action"+
+                            "<th scope='col'>" + "Action"+
                             "</th>" +
                         "</tr>"+
                     "</thead>"
@@ -196,7 +197,7 @@ $(document).ready(function(){
                                     "<td>"+
                                     "<form action=\"../CTRL/doneTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous terminer cette tâche ?');\" class=\"inline\">"+
                                         "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                        "<button type=submit>"+
+                                        "<button type=submit class='btn btn-outline-primary'>"+
                                             "Terminé" +
                                         "</button>"+
                                     "</form>";
@@ -204,13 +205,13 @@ $(document).ready(function(){
                                     if (status == 1) {
                                         $htmlIPT += "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
                                             "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                            "<button type=submit>"+
+                                            "<button type=submit class='btn btn-outline-secondary'>"+
                                                 "Edit" +
                                                 "</button>"+
                                         "</form>"+
                                             "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                                                 "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                                "<button type=submit>"+
+                                                "<button type=submit class='btn btn-outline-danger'>"+
                                                     "Delete" +
                                                 "</button>"+
                                             "</form>";
@@ -242,25 +243,25 @@ $(document).ready(function(){
          success:function(response){	
             var status = response['status']
                 $("#yourDoneList").append(
-                    "<thead>" +
+                    "<thead class ='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col'>" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date de fin" +
+                            "<th scope='col'>" + "Date de fin" +
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                             "</th>"+
-                            "<th>" + "Action"+
+                            "<th scope='col'>" + "Action"+
                             "</th>" +
                         "</tr>"+
                     "</thead>"
@@ -296,7 +297,7 @@ $(document).ready(function(){
                                         $htmlDT += "<td>"+
                                         "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
                                             "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                            "<button type=submit>"+
+                                            "<button type=submit class='btn btn-outline-danger'>"+
                                                 "Delete" +
                                             "</button>"+
                                         "</form>";

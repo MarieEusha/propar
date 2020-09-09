@@ -36,7 +36,7 @@ $(document).ready(function(){
                     });
                     
                     $("#continue").click(function(){
-                        window.location = "../VIEW/taskList.php";
+                        window.location = "../VIEW/taskAccount.php";
                     });
                 }else if(response == "error"){
                     let msg ="Un des champs est vide";

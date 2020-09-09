@@ -6,12 +6,11 @@ h3 {
     background-color: #07a5e7;
 }
 
-.cover {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
+
+h2 {
+    margin-bottom : 50px;
 }
+
 
 .blur-in {
     -webkit-animation: blur 2s forwards;
@@ -28,8 +27,9 @@ h3 {
 }
 
 .pop-up {
-    position: fixed;
+    position : fixed;
     margin: 5% auto;
+    margin-left : 10%;
     left: 0;
     right: 0;
     z-index: 2;
@@ -85,3 +85,26 @@ h3 {
 .inline {
     display: inline-block;
 }
+
+.input-group{
+    max-width: 400px;
+}
+
+.margin-top{
+    padding-top : 50px;
+    
+}
+
+.margin-left{
+    margin-left : 50px;
+}
+.center{
+    margin-top: 90px;
+    margin-left: 110px;
+}
+
+.radio {
+    padding-right : 50px;
+}
+
+

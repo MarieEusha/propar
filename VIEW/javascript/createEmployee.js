@@ -18,11 +18,10 @@ $(document).ready(function(){
                 login :  $("#loginEmp").val(),
                 password :  $("#mdp").val(),
                 mail : $("#mail").val(),
-                status : $("input[name='status']").val()
+                status : $("input[name='status']:checked").val()
 
             },
          success:function(response){	
-
                 if(response == "enter"){
                     $(function() {
                         $('#cEmp').css('display:block');
@@ -51,7 +50,7 @@ $(document).ready(function(){
                     let msg = "Un des champs est vide";
                     errorMsg(msg);
                 }else if (response == "existLogin"){
-                    let msg = "Cet employé existe déjà"
+                    let msg = "Cet employé existe déjà";
                     errorMsg(msg);
                 }
             },

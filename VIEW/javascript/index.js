@@ -39,24 +39,24 @@ $(document).ready(function(){
          success:function(response){	
 
                 $("#createdList").append(
-                    "<thead>" +
+                    "<thead class='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col'>" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date de création"+
+                            "<th scope='col'>" + "Date de création"+
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
                             "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                              "</th>" +
                         "</tr>"+
                     "</thead>"
@@ -64,9 +64,9 @@ $(document).ready(function(){
                         response[0].forEach(function (element){
                             $('#createdList').append(
                                 "<tr>" +
-                                    "<th>"+
+                                    "<td>"+
                                         element.id_task +
-                                    "</th>" +
+                                    "</td>" +
                                     "<td>"+
                                         element.task_label +
                                     "</td>" +
@@ -114,23 +114,23 @@ $(document).ready(function(){
          success:function(response){	
             
                 $("#inProTask").append(
-                    "<thead>" +
+                    "<thead class='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col'>" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date d'attribution" +
+                            "<th scope='col'>" + "Date d'attribution" +
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                             "</th>"+
                         "</tr>"+
                     "</thead>"
@@ -188,23 +188,23 @@ $(document).ready(function(){
          success:function(response){	
             
                 $("#DoneList").append(
-                    "<thead>" +
+                    "<thead class='thead-dark'>" +
                         "<tr>" +
-                            "<th>" + "#"+
+                            "<th scope='col'>" + "#"+
                             "</th>"+
-                            "<th>" + "Tâche"+
+                            "<th scope='col'>" + "Tâche"+
                             "</th>"+
-                           "<th>" + "Type"+
+                           "<th scope='col'>" + "Type"+
                            "</th>"+
-                            "<th>" + "Description"+
+                            "<th scope='col'>" + "Description"+
                             "</th>"+
-                            "<th>" + "Client"+
+                            "<th scope='col'>" + "Client"+
                             "</th>"+
-                            "<th>" + "Date de fin" +
+                            "<th scope='col'>" + "Date de fin" +
                             "</th>"+
-                           "<th>" + "Status"+
+                           "<th scope='col'>" + "Status"+
                             "</th>"+
-                            "<th>" + "Employé"+
+                            "<th scope='col'>" + "Employé"+
                             "</th>"+
                         "</tr>"+
                     "</thead>"

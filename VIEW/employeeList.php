@@ -22,15 +22,16 @@ include('components/header.php')
     </div>
 
 <div id ="employeeList">
-    <table id="employeeListTable">
+    <table  class="table" id="employeeListTable">
         
     </table>
 </div>
 
 <?php if($_SESSION['employee']['status'] == 1 ){ ?>
-<a href="createEmployee.php"><button type=submit name="createEmployee" id="idEmployee"> Ajouter un employé</button></a>
+<a href="createEmployee.php"><button type=submit class="btn btn-outline-info" name="createEmployee" id="idEmployee"> Ajouter un employé</button></a>
 
 <?php } ?>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.0/jquery.dataTables.min.js'></script>
     <script src ="javascript/employeeList.js"></script>
 
 <?php

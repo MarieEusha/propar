@@ -12,11 +12,12 @@ $status = (int)$_SESSION['employee']['status'];
 $count = Management::searchTaskInProgressByEmployeeCount($id_employee);
 
 
-if(isset($id_task) && isset($id_employee) && !empty($id_task) && !empty($id_employee)){
-    if($count < 5 && $status == 1){
-    $swapToInProgress = Management::statusInProgress($id_task,$id_employee);
 
-    header('Location: ../VIEW/taskAccount.php');
+if(isset($id_task) && isset($id_employee) && !empty($id_task) && !empty($id_employee)){
+    if($count < 5 && $status == 1 || $count <3 && $status == 2 || $count < 1 && $status == 3){
+        $swapToInProgress = Management::statusInProgress($id_task,$id_employee);
+
+        header('Location: ../VIEW/taskAccount.php');
     }
 }
 

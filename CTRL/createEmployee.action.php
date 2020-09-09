@@ -12,7 +12,6 @@ $mail = $_POST['mail'];
 $status = $_POST['status'];
 
 
-
 $dbLogin = Management::searchEmployee($login);
 
 
