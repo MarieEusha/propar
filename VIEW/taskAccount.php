@@ -45,6 +45,9 @@ include('components/header.php')
 <?php }?>
     <a href="createTask.php"><button type=submit class = "btn btn-outline-info" name="addTask" id="addTask" > Ajouter une tâche</button></a>
 
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.0/jquery.dataTables.min.js'></script>
     <script src ="javascript/taskAccount.js"></script>
 
 <?php

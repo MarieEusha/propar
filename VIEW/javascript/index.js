@@ -59,10 +59,11 @@ $(document).ready(function(){
                             "<th scope='col'>" + "Employé"+
                              "</th>" +
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyWait'>"  + "</tbody>" 
                         )
                         response[0].forEach(function (element){
-                            $('#createdList').append(
+                            let $htmlIndex =
                                 "<tr>" +
                                     "<td>"+
                                         element.id_task +
@@ -90,8 +91,11 @@ $(document).ready(function(){
                                     "</td>" +
                                 
                                 "</tr>"
-                            )
+                                $('#tbodyWait').append($htmlIndex);
                         });
+                        $(document).ready( function () {
+                            $('#createdList').DataTable();
+                        } );
 
          },
             error:function(response){
@@ -133,10 +137,11 @@ $(document).ready(function(){
                             "<th scope='col'>" + "Employé"+
                             "</th>"+
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyPro'>"  + "</tbody>" 
                         )
                         response[1].forEach(function (element){
-                            $('#inProTask').append(
+                            let $htmlIndPro =                        
                                 "<tr>" +
                                     "<th>"+
                                         element.id_task +
@@ -164,8 +169,11 @@ $(document).ready(function(){
                                     "</td>" +
             
                                 "</tr>"
-                            )
+                                $('#tbodyPro').append($htmlIndPro);
                         });
+                        $(document).ready( function () {
+                            $('#inProTask').DataTable();
+                        } );
 
          },
             error:function(response){
@@ -207,10 +215,11 @@ $(document).ready(function(){
                             "<th scope='col'>" + "Employé"+
                             "</th>"+
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyDone'>"  + "</tbody>" 
                         )
                         response[2].forEach(function (element){
-                            $('#DoneList').append(
+                          let $htmlIndDone =
                                 "<tr>" +
                                     "<th>"+
                                         element.id_task +
@@ -238,9 +247,11 @@ $(document).ready(function(){
                                     "</td>" +
             
                                 "</tr>"
-                            )
+                                $('#tbodyDone').append($htmlIndDone)
                         });
-
+                        $(document).ready( function () {
+                            $('#DoneList').DataTable();
+                        } );
          },
             error:function(response){
                 

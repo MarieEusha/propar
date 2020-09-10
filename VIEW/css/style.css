@@ -1,3 +1,4 @@
+
 h3 {
     text-align: center;
     padding-top: 15px;
@@ -108,3 +109,24 @@ h2 {
 }
 
 
+.dataTables_paginate,.dataTables_info{
+    text-align:center;
+    
+
+}
+.paginate_button {
+    color : #000000;
+    text-decoration: none;
+    padding: 4px 2px 0;
+}
+
+.paginate_button:hover {
+    color : #000000;
+
+}
+
+.dataTables_length,.dataTables_filter{
+    padding-top:15px;
+    text-align:right;
+    margin-right : 50px;
+}

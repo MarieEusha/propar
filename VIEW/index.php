@@ -2,7 +2,7 @@
     session_start();
 ?>
 <?php 
-unset($_SESSION);    
+unset($_SESSION["employee"]);    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +15,7 @@ unset($_SESSION);
     <title>propar</title>
 </head>
 <body>
-    
-</body>
-</html>
-<a href="login.php"><button class="btn btn-primary pull-right" id="login">Se connecter</button></a>
+    <a href="login.php"><button class="btn btn-primary pull-right" id="login">Se connecter</button></a>
     <button type="submit" class="btn btn-dark" id="createdTask">Tâches crées</button>
     <button type="submit" class="btn btn-dark" id="inProgressTask">Tâches en cours</button>
     <button type="submit" class="btn btn-dark" id="TaskDone">Tâches terminées</button>
@@ -38,7 +35,12 @@ unset($_SESSION);
         </table>
     </div>
 
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.0/jquery.dataTables.min.js'></script>
     <script src ="javascript/index.js"></script>
+
+</body>
+</html>
 
 <?php
 include(__DIR__.'/components/footer.php');

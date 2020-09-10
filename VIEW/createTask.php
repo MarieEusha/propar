@@ -41,19 +41,7 @@ include(__DIR__.'/components/header.php')
                     <input type="text" class="form-control input" aria-label="Default" aria-describedby="inputGroup-sizing-default" name='mail' id="mail"></input>
                 </div>
                 <p>Type de tâches</p>
-                <div class="input-group mx-sm-3 mb-2">
-                    <div class = "radio">
-                        <input type="radio" id="importante" name="type" value="1" checked>
-                        <label for="importante">importante</label>
-                    </div>
-                    <div class = "radio">
-                        <input type="radio" id="moyenne" name="type" value="2">
-                        <label for="moyenne">moyenne</label>
-                    </div>
-                    <div class = "radio">
-                        <input type="radio" id="petite" name="type" value="3">
-                        <label for="petite">petite</label>
-                    </div>
+                <div id="divRadio" class="input-group mx-sm-3 mb-2">
                 </div>
                 <div class="center">
                     <button type = "submit" class= "btn btn-primary" name = "createTask" id="createTask">Création de tache</button>  

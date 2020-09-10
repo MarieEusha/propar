@@ -5,6 +5,28 @@ $(document).ready(function(){
         $('.alert').delay(1000).fadeOut(2000);
     }
     
+    $.ajax({
+        url: '../CTRL/selectAllType.action.php',
+        type : 'POST',
+        
+
+        success : function(response){
+            response = JSON.parse(response);
+            response.forEach(function(element){
+                $("#divRadio").append(
+                    "<div class = 'radio'>"+
+                        "<input type='radio' id='"+ element.label +"' name='type' value= '" + element.id_type +"' checked></input>"+
+                        "<label for='"+element.label+"'>"+element.label+"</label>"+
+                    "</div>"
+                )
+            })
+        },
+        error:function(response){
+                
+            alert('error'); 
+
+        },
+    })
     $("#createTask").click(function(e){
         e.preventDefault();
 

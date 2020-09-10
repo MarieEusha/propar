@@ -188,9 +188,16 @@ class Management{
         return $customer['id_customer'];
 
         }
+        public static function selectType(){
+            $query =
+            'SELECT *
+            FROM 
+                type';
+            $allType = self::findAll($query,[]);
+            return $allType; 
+        }
 
-
-        public static function addType($label, $price){ //$label = $_POST['label'] and $price = $_POST['price']
+        public static function addType($label, $price){ 
             $query = 
                 'INSERT INTO
                         type 
@@ -482,8 +489,10 @@ class Management{
                     id_task = :id_task,
                     task.label = :label,
                     description = :description,
+                    in_progress_date = Now(),
                     id_type = :id_type,
-                    id_employee = :id_employee
+                    id_employee = :id_employee,
+                    status = 2
                 WHERE 
                     id_task = :id_task
             ';
@@ -575,7 +584,7 @@ class Management{
                     customer 
                 ON 
                     task.id_customer = customer.id_customer
-                INNER JOIN 
+                LEFT JOIN 
                     employee
                 ON 
                     task.id_employee = employee.id_employee
@@ -606,7 +615,7 @@ class Management{
                 FROM task
                 INNER JOIN type ON task.id_type = type.id_type
                 INNER JOIN customer ON task.id_customer = customer.id_customer
-                INNER JOIN employee ON task.id_employee = employee.id_employee
+                LEFT JOIN employee ON task.id_employee = employee.id_employee
 
                 WHERE status = 3
 
@@ -674,3 +683,7 @@ class Management{
  
 
 }
+
+
+
+

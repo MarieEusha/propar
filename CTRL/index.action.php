@@ -10,4 +10,5 @@ $taskDone = Management::displayTaskDone();
 
 $allTask = [$createdTask,$taskInProgress,$taskDone];
 
+
 echo json_encode($allTask);

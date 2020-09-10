@@ -1,7 +1,8 @@
 
-    
 $(document).ready(function(){
  
+
+
     $("#tableCreatedTask").hide();
     $("#yourTableDone").hide();
     $("#yourTableProgress").show();
@@ -38,12 +39,12 @@ $(document).ready(function(){
     $("#allCreatedTask").click(function(e){
         e.preventDefault();
 
-            $.ajax({
+        $.ajax({
             url:'../CTRL/taskAccount.action.php',
             type:'POST',
             dataType:'json', 
 
-         success:function(response){	
+            success:function(response){	
                 var status = response['status'];
                 $("#allCreatedList").append(
                     "<thead class ='thead-dark'>" +
@@ -67,61 +68,75 @@ $(document).ready(function(){
                              "<th scope='col'>" + "Action"+
                              "</th>" +
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyWait'>"  + "</tbody>"  
+                    
                     )
-
-                    response['allTask'][0].forEach(function (element){
-                        let $htmlCT = "<tr>" +
-                        "<th>"+
-                            element.id_task +
-                        "</th>" +
-                        "<td>"+
-                            element.task_label +
-                        "</td>" +
-                        "<td>"+
-                            element.type_label +
-                        "</td>" +
-                        "<td>"+
-                            element.description +
-                        "</td>" +
-                        "<td style=' text-transform:capitalize;'>"+
-                            element.customer_firstname + ' ' + element.customer_lastname +
-                        "</td>" +
-                        "<td>"+
-                            element.order_date +
-                        "</td>" +
-                        "<td>"+
-                            "En attente" +
-                        "</td>" +
-                        "<td>"+
-                        "Non attribué" +
-                        "</td>" +
-                        "<td>";
-                        if ((status == 1 && response['count'] < 5 )|| (status == 2 && response['count'] < 3) || (status == 3 && response['count'] < 1)) {
-                            $htmlCT += 
-                            "<form action=\"../CTRL/statusInProgress.action.php\" method=\"POST\" onsubmit=\"return confirm('La tâche vous a été attribuée');\" class=\"inline\">"+
-                                "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                "<button type=submit class='btn btn-outline-primary'>"+
-                                "Attribution" +
-                                "</button>"+
-                            "</form>";
-                        }
-                        if (status == 1) {
-                            $htmlCT += 
-                                "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
+                    if (response['allTask'][0] != false){    
+                        response['allTask'][0].forEach(function (element){
+                            let $htmlCT = "<tr>" +
+                            "<th>"+
+                                element.id_task +
+                            "</th>" +
+                            "<td>"+
+                                element.task_label +
+                            "</td>" +
+                            "<td>"+
+                                element.type_label +
+                            "</td>" +
+                            "<td>"+
+                                element.description +
+                            "</td>" +
+                            "<td style=' text-transform:capitalize;'>"+
+                                element.customer_firstname + ' ' + element.customer_lastname +
+                            "</td>" +
+                            "<td>"+
+                                element.order_date +
+                            "</td>" +
+                            "<td>"+
+                                "En attente" +
+                            "</td>" +
+                            "<td>"+
+                            "Non attribué" +
+                            "</td>" +
+                            "<td>";
+                            if ((status == 1 && response['count'] < 5 )|| (status == 2 && response['count'] < 3) || (status == 3 && response['count'] < 1)) {
+                                $htmlCT += 
+                                "<form action=\"../CTRL/statusInProgress.action.php\" method=\"POST\" onsubmit=\"return confirm('La tâche vous a été attribuée');\" class=\"inline\">"+
                                     "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                    "<button type=submit class='btn btn-outline-danger'>"+
-                                        "Delete" +
+                                    "<button type=submit class='btn btn-outline-primary'>"+
+                                    "Attribution" +
                                     "</button>"+
                                 "</form>";
-                        }
+                            }
+                            if (status == 1) {
+                                $htmlCT += 
+                                "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
+                                    "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
+                                        "<button type=submit class='btn btn-outline-secondary'>"+
+                                           "Edit" +
+                                        "</button>"+
+                                "</form>"+
+                                    "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
+                                        "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
+                                        "<button type=submit class='btn btn-outline-danger'>"+
+                                            "Delete" +
+                                        "</button>"+
+                                    "</form>";
+                            }
 
                         $htmlCT += "</td>" +
                                 "</tr>";
 
-                        $('#allCreatedList').append($htmlCT)
-                    });
+                        $('#tbodyWait').append($htmlCT)
 
+
+                        });
+                        
+                    $(document).ready( function () {
+                        $('#allCreatedList').DataTable();
+                    } );
+                }
          },
             error:function(response){
                 console.log(table);
@@ -134,7 +149,7 @@ $(document).ready(function(){
 
     $("#yourTask").click(function(e){
         e.preventDefault();
-
+       
             $.ajax({
             url:'../CTRL/taskAccount.action.php',
             type:'POST',
@@ -165,63 +180,74 @@ $(document).ready(function(){
                             "<th scope='col'>" + "Action"+
                             "</th>" +
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyProgress'>"  + "</tbody>" 
                         )
-                        response['allTask'][1].forEach(function (element){
-                             let $htmlIPT = 
-                                "<tr>" +
-                                    "<th>"+
-                                        element.id_task +
-                                    "</th>" +
-                                    "<td>"+
-                                        element.task_label +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.type_label +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.description +
-                                    "</td>" +
-                                    "<td style=' text-transform:capitalize;'>"+
-                                        element.customer_firstname + ' ' + element.customer_lastname +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.in_progress_date +
-                                    "</td>" +
-                                    "<td>"+
-                                        "En cours" +
-                                    "</td>" +
-                                    "<td style=' text-transform:capitalize;'>"+
-                                        element.employee_firstname + ' ' + element.employee_lastname +
-                                    "</td>" +  
-                                    "<td>"+
-                                    "<form action=\"../CTRL/doneTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous terminer cette tâche ?');\" class=\"inline\">"+
-                                        "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                        "<button type=submit class='btn btn-outline-primary'>"+
-                                            "Terminé" +
-                                        "</button>"+
-                                    "</form>";
 
-                                    if (status == 1) {
-                                        $htmlIPT += "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
+                        console.log(response['allTask'][1])
+                    if (response['allTask'][1] != false){    
+                            response['allTask'][1].forEach(function (element){
+                                let $htmlIPT = 
+                                    "<tr>" +
+                                        "<th>"+
+                                            element.id_task +
+                                        "</th>" +
+                                        "<td>"+
+                                            element.task_label +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.type_label +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.description +
+                                        "</td>" +
+                                        "<td style=' text-transform:capitalize;'>"+
+                                            element.customer_firstname + ' ' + element.customer_lastname +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.in_progress_date +
+                                        "</td>" +
+                                        "<td>"+
+                                            "En cours" +
+                                        "</td>" +
+                                        "<td style=' text-transform:capitalize;'>"+
+                                            element.employee_firstname + ' ' + element.employee_lastname +
+                                        "</td>" +  
+                                        "<td>"+
+                                        "<form action=\"../CTRL/doneTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous terminer cette tâche ?');\" class=\"inline\">"+
                                             "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                            "<button type=submit class='btn btn-outline-secondary'>"+
-                                                "Edit" +
-                                                "</button>"+
-                                        "</form>"+
-                                            "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
+                                            "<button type=submit class='btn btn-outline-primary'>"+
+                                                "Terminé" +
+                                            "</button>"+
+                                        "</form>";
+
+                                        if (status == 1) {
+                                            $htmlIPT += "<form action=\"../CTRL/selectTaskInfo.action.php\" method=\"POST\" class=\"inline\">"+
                                                 "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                                "<button type=submit class='btn btn-outline-danger'>"+
-                                                    "Delete" +
-                                                "</button>"+
-                                            "</form>";
-                                    }
+                                                "<button type=submit class='btn btn-outline-secondary'>"+
+                                                    "Edit" +
+                                                    "</button>"+
+                                            "</form>"+
+                                                "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
+                                                    "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
+                                                    "<button type=submit class='btn btn-outline-danger'>"+
+                                                        "Delete" +
+                                                    "</button>"+
+                                                "</form>";
+                                        }
 
-                            $htmlIPT += "</td>" +
-                                "</tr>";
-                                $('#yourInProgressList').append($htmlIPT)
-                        });
+                                $htmlIPT += "</td>" +
+                                    "</tr>";
 
+                                $('#tbodyProgress').append($htmlIPT);
+                               
+ 
+                                    });
+                                $(document).ready( function () {
+                                    $('#yourInProgressList').DataTable();
+                                });
+                        }
+                       
          },
             error:function(response){
                 
@@ -231,6 +257,10 @@ $(document).ready(function(){
 
         });
     });
+
+
+
+
 
     $("#yourTaskDone").click(function(e){
         e.preventDefault();
@@ -264,50 +294,57 @@ $(document).ready(function(){
                             "<th scope='col'>" + "Action"+
                             "</th>" +
                         "</tr>"+
-                    "</thead>"
+                    "</thead>"+
+                    "<tbody id='tbodyDone'>"  + "</tbody>" 
                         )
-                        response['allTask'][2].forEach(function (element){
-                           
-                            let $htmlDT =  "<tr>" +
-                                    "<th>"+
-                                        element.id_task +
-                                    "</th>" +
-                                    "<td>"+
-                                        element.task_label +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.type_label +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.description +
-                                    "</td>" +
-                                    "<td style=' text-transform:capitalize;'>"+
-                                        element.customer_firstname + ' ' + element.customer_lastname +
-                                    "</td>" +
-                                    "<td>"+
-                                        element.ending_date +
-                                    "</td>" +
-                                    "<td>"+
-                                        "Terminée" +
-                                    "</td>" +
-                                    "<td style=' text-transform:capitalize;'>"+
-                                        element.employee_firstname + ' ' + element.employee_lastname +
-                                    "</td>"    
-                                    if (status == 1) {
-                                        $htmlDT += "<td>"+
-                                        "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
-                                            "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
-                                            "<button type=submit class='btn btn-outline-danger'>"+
-                                                "Delete" +
-                                            "</button>"+
-                                        "</form>";
-                                    }
+                        if (response['allTask'][2] != false){    
+                            response['allTask'][2].forEach(function (element){
+                            
+                                let $htmlDT =  "<tr>" +
+                                        "<th>"+
+                                            element.id_task +
+                                        "</th>" +
+                                        "<td>"+
+                                            element.task_label +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.type_label +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.description +
+                                        "</td>" +
+                                        "<td style=' text-transform:capitalize;'>"+
+                                            element.customer_firstname + ' ' + element.customer_lastname +
+                                        "</td>" +
+                                        "<td>"+
+                                            element.ending_date +
+                                        "</td>" +
+                                        "<td>"+
+                                            "Terminée" +
+                                        "</td>" +
+                                        "<td style=' text-transform:capitalize;'>"+
+                                            element.employee_firstname + ' ' + element.employee_lastname +
+                                        "</td>"    
+                                        if (status == 1) {
+                                            $htmlDT += "<td>"+
+                                            "<form action=\"../CTRL/deleteTask.action.php\" method=\"POST\" onsubmit=\"return confirm('Souhaitez-vous supprimer cette tâche ?');\" class=\"inline\">"+
+                                                "<input type=\"hidden\" name= \"idTask\" value=\"" + element.id_task + "\" />"+
+                                                "<button type=submit class='btn btn-outline-danger'>"+
+                                                    "Delete" +
+                                                "</button>"+
+                                            "</form>";
+                                        }
 
-                            $htmlDT += "</td>" +
-                                "</tr>";
-                                $('#yourDoneList').append($htmlDT)
-                        });
+                                $htmlDT += "</td>" +
+                                    "</tr>";
+                                    $('#tbodyDone').append($htmlDT);
 
+                            });
+    
+                            $(document).ready( function () {
+                                $('#yourDoneList').DataTable();
+                            } );
+                        }
          },
             error:function(response){
                 
@@ -346,3 +383,4 @@ $(document).ready(function(){
     });
 
 });
+
