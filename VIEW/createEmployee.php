@@ -33,7 +33,7 @@ include(__DIR__.'/components/header.php')
 
                 <p>Mot de passe</p>
                 <div class="input-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control input" aria-label="Default" aria-describedby="inputGroup-sizing-default" name='mdp' id="mdp"></input>
+                    <input type="password" class="form-control input" aria-label="Default" aria-describedby="inputGroup-sizing-default" name='mdp' id="mdp"></input>
                 </div>
 
                 <p>email</p>
@@ -62,7 +62,7 @@ include(__DIR__.'/components/header.php')
                     </div>
                 </div>
                 <div class ="center">
-                    <button class= "btn btn-primary" name = "createEmployee" id="createEmployee">Création d'employé'</button>    
+                    <button class= "btn btn-primary" name = "createEmployee" id="createEmployee">Création d'employé</button>    
                 </div>
         </div>
 
